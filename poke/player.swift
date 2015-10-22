@@ -8,7 +8,7 @@
 
 import Foundation
 
-class player {
+class Player {
     var Pokers:[Poker] = []
     var score:Int = 0
     var name:String = ""
@@ -21,16 +21,17 @@ class player {
         self.flag = [:]
     }
     
-    func getpokers(pokers Pokers_all:Poker_s,totalplayer tnum:Int,playernum pnum:Int,index Index:Int){
+    func getpokers(pokers Pokers_all:Poker_s,totalplayer tnum:Int,playernum pnum:Int,index Index:Int) ->Int{
         
-        let Len=(pnum == tnum) ? 54 : (Index+tnum/pnum)
-        
-        for(var i=Index;i<Len;i++){
+        let Len=(pnum == tnum) ? 54 : (Index+54/tnum)
+        var i=Index
+        for(;i<Len;i++){
             
             self.Pokers.append(Pokers_all.Pokers[i])
             self.flag[Pokers_all.Pokers[i].description()] = self.Pokers.count-1
             
         }
+        return i
     }
     
     func usecard(index Index:Int){

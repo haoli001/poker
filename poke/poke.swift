@@ -30,7 +30,7 @@ class Poker{
     }
     
     func description()->String{
-        return "\(self.Suite)\(self.Suite)"
+        return "\(self.Suite)\(self.CardNumber)"
     }
     
 }

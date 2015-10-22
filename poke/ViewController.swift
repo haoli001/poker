@@ -13,6 +13,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let Poker_all = Poker_s()
+        
+        var players = [Player]()
+        
+        let playernums = 3
+        
+        var index = 0
+        
+        Poker_all.Shuffle()
+        
+        for i in 1...playernums{
+            let tmp = Player(name: String(i))
+            index = tmp.getpokers(pokers: Poker_all, totalplayer: playernums, playernum: i, index: index)
+            players.append(tmp)
+        }
+        
+        for i in players{
+            for j in i.Pokers{
+                print(j.description(),terminator: " ")
+            }
+            print("")
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
