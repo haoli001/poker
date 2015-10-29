@@ -17,11 +17,12 @@ class ViewController: UIViewController {
         
         var players = [Player]()
         
-        let playernums = 3
+        let playernums = 4
         
         var index = 0
         
-        Poker_all.Shuffle()
+        Poker_all.Shuffle(false)
+        //Poker_all.reset(false)
         
         for i in 1...playernums{
             let tmp = Player(name: String(i))
@@ -29,12 +30,60 @@ class ViewController: UIViewController {
             players.append(tmp)
         }
         
-        for i in players{
-            for j in i.Pokers{
-                print(j.description(),terminator: " ")
+        for i in 0..<players.count{
+            var x:Int,y:Int
+            print(i)
+            switch(i){
+            case 0:
+                x = 160-8*players[i].Pokers.Pokers.count
+                y = 500
+            case 2:
+                x = 160-8*players[i].Pokers.Pokers.count
+                y = 20
+            case 1:
+                x = 300
+                y = 250-6*players[i].Pokers.Pokers.count
+            default:
+                x = 20
+                y = 250-6*players[i].Pokers.Pokers.count
+                
             }
-            print("")
+            
+            
+            let vImgs:[UIImageView] = players[i].show(x,y: y,type: (i%2 == 0) ? true : false )
+            for j in vImgs{
+                self.view.addSubview(j);
+            }
         }
+        players[0].usecard(index: players[0].Pokers.Pokers[0].description())
+
+        for i in 0..<players.count{
+            var x:Int,y:Int
+            print(i)
+            switch(i){
+            case 0:
+                x = 160-8*players[i].Pokers.Pokers.count
+                y = 500
+            case 2:
+                x = 160-8*players[i].Pokers.Pokers.count
+                y = 20
+            case 1:
+                x = 300
+                y = 250-6*players[i].Pokers.Pokers.count
+            default:
+                x = 20
+                y = 250-6*players[i].Pokers.Pokers.count
+            
+            }
+            
+            
+            let vImgs:[UIImageView] = players[i].show(x,y: y,type: (i%2 == 0) ? true : false )
+            for j in vImgs{
+            self.view.addSubview(j);
+            }
+        }
+        
+        
         
     }
 

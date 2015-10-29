@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 class Player {
-    var Pokers:[Poker] = []
+    var Pokers:Poker_s
     var score:Int = 0
     var name:String = ""
     var flag = [String:Int]()
@@ -17,24 +18,31 @@ class Player {
     init(name newName:String){
         self.name = newName
         self.score = 0
-        self.Pokers = []
         self.flag = [:]
+        self.Pokers = Poker_s()
     }
     
     func getpokers(pokers Pokers_all:Poker_s,totalplayer tnum:Int,playernum pnum:Int,index Index:Int) ->Int{
-        
-        let Len=(pnum == tnum) ? 54 : (Index+54/tnum)
+
+        let Len=(pnum == tnum) ? Pokers_all.Pokers.count : (Index+Pokers_all.Pokers.count/tnum)
         var i=Index
         for(;i<Len;i++){
             
-            self.Pokers.append(Pokers_all.Pokers[i])
-            self.flag[Pokers_all.Pokers[i].description()] = self.Pokers.count-1
+            self.Pokers.Pokers.append(Pokers_all.Pokers[i])
+            self.Pokers.flag[Pokers_all.Pokers[i].description()] = true
             
         }
+        self.Pokers.Pokers.sortInPlace({p1,p2 in p1.description()<p2.description()});
         return i
     }
     
-    func usecard(index Index:Int){
-        self.flag[self.Pokers[Index].description()] = -1
+    func usecard(index Index:String){
+        self.Pokers.flag[Index] = false;
     }
+    
+    func show( x:Int , y:Int , type :Bool = false) -> [UIImageView]{
+        
+        return self.Pokers.show(x, y: y,type: type)
+    }
+    
 }
