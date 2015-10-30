@@ -39,8 +39,12 @@ class Player {
     func usecard(index Index:String){
         self.Pokers.flag[Index] = false;
     }
-    
+    /*
     func show( x:Int , y:Int , type :Bool = false) -> [UIImageView]{
+        
+        return self.Pokers.show(x, y: y,type: type)
+    }*/
+    func show( x:Int , y:Int , type :Bool = false) -> [UIButton]{
         
         return self.Pokers.show(x, y: y,type: type)
     }

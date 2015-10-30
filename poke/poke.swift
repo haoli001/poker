@@ -22,7 +22,7 @@ extension Array
     }
 }
 
-class Poker{
+class Poker: NSObject {
     var Suite:String
     var CardNumber:String
     
@@ -31,8 +31,12 @@ class Poker{
         self.Suite=newSuite
     }
     
-    func description()->String{
+    func description(let y:Int = 0)->String{
         return "\(self.Suite)\(self.CardNumber)"
+    }
+    func toInt()->Int{
+        let map = ["S":1,"D":2,"H":3,"C":4]
+        return map[ self.Suite ]!*100+Int(self.CardNumber)!
     }
     /*
     func show(j:Int, x:Int , y:Int , type :Bool = false) -> UIImageView{
@@ -70,13 +74,11 @@ class Poker{
         let btn:UIButton = UIButton()
         btn.frame = CGRect(x:x+16*j*( type ? 1 : 0 ),y:y+16*j*(type ? 0 : 1),width:60,height:80)
         btn.setBackgroundImage(UIImage(named:self.description()),forState:UIControlState.Normal)
-        btn.addTarget(self, action: Selector("buttonOnClick"), forControlEvents: UIControlEvents.TouchUpInside)
+        btn.addTarget(self, action: Selector("buttonOnClick:"), forControlEvents: UIControlEvents.TouchUpInside)
+        btn.tag = self.toInt()
         return btn
     }
-    func buttonOnClick() {
-        print("点击了铵键")
-        // self.btn.backgroundColor=UIColor.greenColor()
-    }
+    
     
 }
 
